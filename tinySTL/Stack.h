@@ -1,6 +1,12 @@
 //书上的示例
 #ifndef STACKTP1_H_
 #define STACKTP1_H_
+
+#include<iostream>
+#include<string>
+
+using std::string;
+
 template <class Type>
 class Stack
 {
@@ -19,6 +25,8 @@ class Stack
     bool push(const Type &item);
     bool pop(Type & item);
     Stack & operator = (const Stack &st);
+    void status(void);
+    void fill(void);
 };
 
 //构造函数，ss为栈的长度
@@ -86,4 +94,33 @@ Stack<Type>& Stack<Type>::operator=(const Stack<Type> &st)
     items[i] = st.items [i];
     return *this;//返回Stack的引用可以实现连等于符号
 }
+
+template<class Type>
+void Stack<Type>::status(void)
+{
+    //打印具体有多少元素
+    std::cout<<"There are "<<top<<" element\n";
+
+    //打印所有元素
+    std::cout<<"The elements are as follows\n:";
+    for(int i = 0;i <top;i++)
+    {
+        std::cout<<items[i]<<",";
+    }
+    std::cout<<"\n";
+}
+
+//向类中填充元素方便算法运行
+template<class Type>
+void Stack<Type>::fill(void)
+{
+    for(int i =0;i <stackSize;i++)
+    {
+        items[i] = i;
+        top++;
+    }
+    std::cout<<"fill complete.\n";
+}
+
+
 #endif
