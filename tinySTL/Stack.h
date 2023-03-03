@@ -121,6 +121,4 @@ void Stack<Type>::fill(void)
     }
     std::cout<<"fill complete.\n";
 }
-
-
 #endif
