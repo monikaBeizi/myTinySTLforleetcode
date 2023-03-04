@@ -25,6 +25,7 @@ class Stack
     bool push(const Type &item);
     bool pop(Type & item);
     Stack & operator = (const Stack &st);
+    Stack & operator + (const Stack &st);
     void status(void);
     void fill(void);
 };
@@ -132,5 +133,26 @@ void Stack<string>::fill(void)
     }
     std::cout<<"char fill complete.\n";
 }
+
+// 重载+号
+template<class Type>
+Stack<Type>& Stack<Type>::operator+(const Stack<Type> & st)
+{
+    Type * temp;
+    temp = new Type[stackSize + st.stackSize];
+    for(int i = 0;i < top+st.top;i++)
+    {
+        if(i < top)
+        temp[i] = items[i];
+        else
+        temp[i] = st.items[i - top];
+    }
+    top = top +st.top;
+    stackSize = stackSize +st.stackSize;
+    delete items;
+    items = temp;
+    return *this;
+}
+//不过这段有些缺陷，在+的时候就会改变左侧的数，不符合平常使用加号的逻辑
 
 #endif
