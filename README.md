@@ -1,2 +1,2 @@
 # myTinySTLforleetcode
-自用来写leetcode的小型初学者STL
+自用，用来写leetcode的小型初学者STL
