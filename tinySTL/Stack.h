@@ -121,4 +121,16 @@ void Stack<Type>::fill(void)
     }
     std::cout<<"fill complete.\n";
 }
+
+template<>
+void Stack<string>::fill(void)
+{
+    for(int i = 0;i < stackSize;i++)
+    {
+        items[i] = "test";
+        top++;
+    }
+    std::cout<<"char fill complete.\n";
+}
+
 #endif
