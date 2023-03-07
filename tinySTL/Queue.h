@@ -27,8 +27,8 @@ class Queue
     int rear;
 
     public:
-    explicit Queue(int qs = SIZE);
-    Queue(const Queue &qu);
+    explicit Queue(int qs = SIZE);  //构造函数，qs为队列的长度
+    Queue(const Queue &qu);         //构造函数，括号里事对队列常量的引用，保证其不会被修改。拷贝构造函数
     ~Queue(){delete [] items;};
     bool isempty(){return length == 0;}
     bool isfull(){return length == queueSize;}
@@ -36,7 +36,7 @@ class Queue
     bool pop(Type & item);
     Queue& operator=(const Queue &qu);
     void fill(void);
-    void status(void);
+    void status(void);   //打印该队列的状态，有多少元素，元素是什么
 
 };
 
@@ -138,7 +138,7 @@ void Queue<Type>::fill(void)
     std::cout<<"fill complete. \n";
 }
 
-//显式具体化
+//显式具体化，可以在当队列的元素类型为string 的时候，保证fill方法的运行，而不是运行上面的那个
 template<>
 void Queue<string>::fill(void)
 {
