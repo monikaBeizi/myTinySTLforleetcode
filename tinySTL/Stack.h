@@ -13,14 +13,14 @@ class Stack
     private:
     enum {SIZE = 10};
     int stackSize;
-    Type * items;
-    int top;
+    Type * items;  //指针数组
+    int top;        //栈顶
 
     public:
-    explicit Stack(int ss = SIZE);
+    explicit Stack(int ss = SIZE);  //定义构造函数，explicit为了防止隐式转换？我也不知道，但看别人这么加我也就这么整了
     Stack(const Stack & st);
-    ~Stack(){delete [] items;}
-    bool isempty(){return top == 0;}
+    ~Stack(){delete [] items;}   //析构函数，用来清理申请的空间
+    bool isempty(){return top == 0;}     
     bool isfull(){return top == stackSize;}
     bool push(const Type &item);
     bool pop(Type & item);
@@ -123,6 +123,7 @@ void Stack<Type>::fill(void)
     std::cout<<"fill complete.\n";
 }
 
+// 向字符栈中填充字符。上面的只满足数字栈的情况，所以这个方法是用来填充字符“test”的
 template<>
 void Stack<string>::fill(void)
 {
