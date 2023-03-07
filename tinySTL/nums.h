@@ -2,70 +2,21 @@
 #define NUMSP1_H_
 
 #include<iostream>
-
-// template<class Type,size_t N>
-// void insertSortPositive(Type (& arr)[N])
-// {
-
-//     //N是整个数组的大小
-//     int i;
-
-//     for(i = 1;i < N; i++)
-//     {
-//         if(arr[i-1]>arr[i])
-//         {
-//             int tempForj = 0;
-//             int temp = arr[i];
-//             for( int j = i -1;j>=0 && temp < arr[j];j--)//这里用temp而不是用arr[i]可以防止在前移的过程中，arr[i]的数值被改变而影响结果
-//             {
-//                 arr[j+1] = arr[j];
-//                 if(j-1 >= 0 && temp < arr[j -1])
-//                 {
-//                     tempForj = j -1;
-//                 }
-//             }
-//             arr[tempForj+1] = temp;
-//         }
-//     }
-// }
-
-// template<class Type,size_t N>
-// void insertSortReverse(Type (&arr)[N])
-// {
-//     int i;
-//     for(i = 1;i < N;i ++)
-//     {
-//         if(arr[i-1]<arr[i])
-//         {
-//             int temp=arr[i];
-//             int tempForj = 0;
-//             for(int j = i-1;j>= 0 && temp > arr[j];j--)
-//             {
-//                 arr[j+1] = arr[j];
-//                 if(j - 1>=0 && temp > arr[j -1])
-//                 {
-//                     tempForj =j-1;
-//                 }
-//             }
-//             arr[tempForj+1] = temp;
-//         }
-//     }
-// }
-
+//插入排序
 template<class Type,size_t N>
 void insertSortPositive(Type (&arr)[N])
 {
     int i,j,temp;
-    for(i = 1;i < N; i ++)
+    for(i = 1;i < N; i ++)//每次循环都是以前面已经是正序为基础的插入排序，或者说每次插入都是往前面正序里找到一个合适的位置
     {
-        if(arr[i]<arr[i -1])
+        if(arr[i]<arr[i -1])//如果找到前面元素大于后边元素
         {
-            temp = arr[i];
+            temp = arr[i];//将该往前调的元素提出来，空出位置让前面大的数后移，给这个数腾地
             for( j =i -1;j >=0 && arr[j] > temp;--j)
             {
-                arr[j+1]=arr[j];
+                arr[j+1]=arr[j];//后挪的具体操作，当arr【j】不再大于temp也就是移动之前的a【i】数，就结束移动
             }
-            arr[j+1] = temp;
+            arr[j+1] = temp;//将这个数放在位移之后刚好空出来的地方。
         }
     }
 }
