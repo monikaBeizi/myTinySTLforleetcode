@@ -88,6 +88,7 @@ void NodeList<Type>::status(void)
         std::cout<<temp->data<<",";
         temp = temp->next;
     }
+    std::cout<<"\n";
 }
 
 //查找链表中是否存在某个元素，讲道理是不是还要整个返回下标的函数
@@ -106,46 +107,61 @@ bool NodeList<Type>::find(Type d)
     return false;
 }
 
-//删除节点
-template<class Type>
-void NodeList<Type>::remove(Node<Type> &d)//不过必须要直到其中某个节点才行，得整个删除具体数据的重载
-{
-    //等下如果输入的节点地址找不到的话，不久把head后面那个节点给删除了吗。bug啊，得改
-    Node<Type>*temp = head;
+//先雪藏了，感觉我都没有调出节点地址的方法怎么能在方法里输入节点地址，先这么放着吧，而且本身还有bug
+// //删除节点
+// template<class Type>
+// void NodeList<Type>::remove(Node<Type> &d)//不过必须要直到其中某个节点才行，得整个删除具体数据的重载
+// {
+//     //等下如果输入的节点地址找不到的话，不久把head后面那个节点给删除了吗。bug啊，得改
+//     Node<Type>*temp = head;
 
-    while(temp != nullptr)
-    {
-        if(temp ->next == &d)//从前往后找，如果有地址一样的节点就退出循环
-        {
-            break;
-        }
-    }
+//     while(temp != nullptr)
+//     {
+//         if(temp ->next == &d)//从前往后找，如果有地址一样的节点就退出循环
+//         {
+//             break;
+//         }
+//         temp->next;
+//     }
 
-    Node<Type>*tempAnother = temp->next->next;
-    delete temp->next;
-    temp->next = tempAnother;
-}
+//     Node<Type>*tempAnother = temp->next->next;
+//     delete temp->next;
+//     temp->next = tempAnother;
+// }
 
-//删除节点，输入为data的重载函数
+
+//删除节点，输入为data的重载函数,bug1:删除节点不存在
 template<class Type>
 void NodeList<Type>::remove(Type d)
 {
-    Node<Type>*temp = head;
 
-    while(temp != nullptr)
+    Node<Type>*temp = head;
+    if(temp->data == d)
     {
-        if(temp->data == d)//从前往后找，如果有地址一样的节点就退出循环
+        head =temp->next;
+        delete temp;
+        return;
+    }
+
+    while(temp->next != nullptr) //因为第一个节点在上个if语句就检查过了，所以下面就检查next的数据了，这样还可以下面删除的时候简单些
+    {
+        if(temp->next->data == d)//从前往后找，如果有地址一样的节点就退出循环
         {
             break;
         }
+        temp = temp->next;
+    }
+    if(temp->next == nullptr) //如果next后是空指针了，又因为temp本身之前也检查过了，所以就代表着链表里根本没有这个节点
+    //话说真的不用返回int数据类型来表明是否删除成功吗
+    {
+        return;
     }
 
     Node<Type>*tempAnother = temp->next->next;
     delete temp->next;
     temp->next = tempAnother;
+    length --;
 }
-
-
 
 
 #endif
