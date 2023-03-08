@@ -33,6 +33,8 @@ class NodeList
     bool find(Type d);//查找
     void status(void);//打印链表
     void fill(void);
+    Node<Type>* get(int index); //获取下标对应的节点的内存地址
+    void removeAtIndex(int index);  //删除对应下标的节点
 };
 
 //析构函数
@@ -108,7 +110,7 @@ bool NodeList<Type>::find(Type d)
 }
 
 //先雪藏了，感觉我都没有调出节点地址的方法怎么能在方法里输入节点地址，先这么放着吧，而且本身还有bug
-// //删除节点
+//删除节点
 // template<class Type>
 // void NodeList<Type>::remove(Node<Type> &d)//不过必须要直到其中某个节点才行，得整个删除具体数据的重载
 // {
@@ -161,6 +163,25 @@ void NodeList<Type>::remove(Type d)
     delete temp->next;
     temp->next = tempAnother;
     length --;
+}
+
+template<class Type>
+void NodeList<Type>::removeAtIndex(int index)
+{
+    if(index <0 || index >=length)
+    {
+        return ;
+    }
+
+    Node<Type>* temp =head;
+    for(int i =0;i < index;i++)
+    {
+        temp = temp->next;
+    }
+
+    NodeList* p =temp->next;
+    temp->next = temp->next->next;
+    delete p;
 }
 
 
