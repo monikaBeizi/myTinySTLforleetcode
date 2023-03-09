@@ -1,7 +1,8 @@
 #ifndef NUMSP1_H_
 #define NUMSP1_H_
-
+#include<vector>
 #include<iostream>
+using std::vector;
 //插入排序
 template<class Type,size_t N>
 void insertSortPositive(Type (&arr)[N])
@@ -40,4 +41,29 @@ void insertSortReverse(Type (&arr)[N])
 }
 
 
+template<class Type>
+void rotate(vector<Type> &nums,int k)
+{
+    int length = nums.size();
+    int temp =nums[length -1 ];
+    for(int i =0;i<k;i++)
+    {
+        for(int j =length - 2;j >=0,j--)
+        {
+            temp = nums[length - 1];
+            nums[j +1] = nums[j];
+        }
+        nums[0] = temp;
+    }
+}
+
+template<class Type>   //到时候直接把os重载了，这样就更加方便了
+void status(vector<Type>(&nums))
+{
+    int length = nums.size();
+    for(int i =0;i < length; i++)
+    {
+        std::cout<<nums[i];
+    }
+}
 #endif

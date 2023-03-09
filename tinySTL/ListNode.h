@@ -159,29 +159,30 @@ void NodeList<Type>::remove(Type d)
         return;
     }
 
-    Node<Type>*tempAnother = temp->next->next;
-    delete temp->next;
+    Node<Type>*tempAnother = temp->next->next;  
+    delete temp->next;  
     temp->next = tempAnother;
     length --;
 }
 
+//删除下标为index的index的节点 
 template<class Type>
 void NodeList<Type>::removeAtIndex(int index)
 {
-    if(index <0 || index >=length)
+    if(index <0 || index >=length)//检查输入下标是否符合规范
     {
         return ;
     }
 
     Node<Type>* temp =head;
-    for(int i =0;i < index;i++)
+    for(int i =0;i < index;i++)//通过循环找到对应要删掉的节点
     {
         temp = temp->next;
     }
 
     NodeList* p =temp->next;
     temp->next = temp->next->next;
-    delete p;
+    delete p;  //删除节点
 }
 
 
